@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="d-flex justify-content-center align-items-center loginContainer">
+        <div class="col col-lg-4">
+            <form (ngSubmit)="login()">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+                  #email="ngModel" [(ngModel)]="usuarioModel.email" aria-describedby="emailHelp">
+                  <div id="emailHelp" class="form-text">No compartas tu datos a otras personas.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" class="form-control" name="password" #password="ngModel" [(ngModel)]="usuarioModel.password"
+                   id="exampleInputPassword1">
+                </div>
+                <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <button type="submit" class="btn btn-outline-success">Ingresar</button>
+              </form>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

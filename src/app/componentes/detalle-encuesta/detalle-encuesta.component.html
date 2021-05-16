@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-5">
+      <form>
+        <div class="mb-3">
+          <label for="inputTitulo" class="form-label">Título</label>
+          <input type="text" class="form-control" id="inputTitulo" name="titulo" #titulo="ngModel"
+            [(ngModel)]="encuestaModel.titulo" disabled>
+        </div>
+        <div class="mb-3">
+          <label for="inputAutor" class="form-label">Autor</label>
+          <input type="text" class="form-control" id="inputAutor" name="autor" #autor="ngModel"
+            [(ngModel)]="encuestaModel.creadorEncuesta.email" disabled>
+        </div>
+        <div class="mb-3">
+          <label for="inputDescripcion" class="form-label">Descripción</label>
+          <div class="mb-3">
+            <textarea class="form-control" id="inputDescripcion" name="descripcion" #descripcion="ngModel"
+              [(ngModel)]="encuestaModel.descripcion" rows="3" disabled></textarea>
+          </div>
+        </div>
+        <div class="list-group">
+          <a class="list-group-item list-group-item-action " aria-current="true"
+            *ngFor="let encuestas of encuestaModel.listaComentarios">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">
+                <img *ngIf="encuestas.idUsuarioComentario.image === null" src="/assets/man.png" class="avatar-profile">
+                <img *ngIf="encuestas.idUsuarioComentario.image" [src]="encuestas.idUsuarioComentario.image"
+                  class="avatar-profile"> {{encuestas.idUsuarioComentario.usuario}}
+              </h5>
+              <small *ngIf="_usuariosService.getIdentidad().rol === 'Rol_Admin' ">
+                <div class="dropdown">
+                  <button class="btn btn-light btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Editar</a></li>
+                    <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                  </ul>
+                </div>
+              </small>
+            </div>
+            <p class="mb-1">{{encuestas.textoComentario}}</p>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

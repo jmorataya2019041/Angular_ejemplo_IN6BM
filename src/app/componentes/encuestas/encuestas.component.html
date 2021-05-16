@@ -1,0 +1,93 @@
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="d-grid gap-2 d-md-block">
+        <button class="btn btn-outline-success" type="button" data-bs-toggle="modal"
+          data-bs-target="#modalAgregarEncuesta">
+          <i class="bi bi-plus"></i>Agregar</button>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12 col-sm-4" *ngFor="let encuestas of encuestasModelGet; let i = index">
+      <div class="card mb-3" style="max-width: 21rem;">
+        <div class="card-header"> {{encuestas.titulo}} </div>
+        <div class="card-body">
+          <p class="card-text"> {{encuestas.descripcion}} </p>
+        </div>
+        <div class="card-footer text-center">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-primary" [routerLink]="['/detalleEncuesta',encuestas._id]">
+              <i class="bi bi-back"></i>
+            </button>
+            <!-- Otra forma de navegar->
+              <button type="button" class="btn btn-outline-primary" (click)="navegarDetalleEncuesta(encuestas._id)">
+                <i class="bi bi-back"></i>
+              </button>
+            -->
+            <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#acor'+i" aria-expanded="false" [attr.aria-controls]="'acor'+i"
+              (click)="obtenerEncuesta(encuestas._id)"><i class="bi bi-chat-square-text"></i></button>
+            <button type="button" class="btn btn-outline-primary">Right</button>
+          </div>
+        </div>
+      </div>
+      <div class="collapse" [attr.id]="'acor'+i">
+        <div class="card card-body">
+          <form>
+            <div class="mb-3">
+              <label for="inputTextoComentario" class="form-label">Agrege su Comentario</label>
+              <hr>
+              <div class="mb-3">
+                <textarea class="form-control" id="inputTextoComentario" name="textoComentario"
+                  #textoComentario="ngModel" [(ngModel)]="modeloComentario.textoComentario" rows="3"></textarea>
+              </div>
+              <div class="text-end">
+                <button type="submit" class="btn btn-outline-success" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#acor'+i" (click)="agregarComentario()"><i
+                    class="bi bi-plus-circle-dotted"></i>Add
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Agregar Encuesta-->
+<div class="modal fade" id="modalAgregarEncuesta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Encuesta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputTitulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="inputTitulo" name="titulo" #titulo="ngModel"
+              [(ngModel)]="encuestaModelAdd.titulo">
+          </div>
+          <div class="mb-3">
+            <label for="inputDescripcion" class="form-label">Descripción</label>
+            <div class="mb-3">
+              <textarea class="form-control" id="inputDescripcion" name="descripcion" #descripcion="ngModel"
+                [(ngModel)]="encuestaModelAdd.descripcion" rows="3"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
+          (click)="agregarEncuesta()">Confirm</button>
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

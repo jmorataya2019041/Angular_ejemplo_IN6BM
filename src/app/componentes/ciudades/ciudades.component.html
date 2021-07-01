@@ -1,0 +1,83 @@
+<br>
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#agregarCanvas" aria-controls="agregarCanvas">
+  Agregar
+</button>
+<hr>
+<div class="row">
+  <div class="col-xs-12 col-sm-4" *ngFor="let ciud of getCiudades">
+    <div class="card mb-3">
+      <div class="card-header">
+        {{ ciud.data.nombreCiudad }}
+      </div>
+      <div class="card-body">
+        <p class="card-text">Habitantes: {{ ciud.data.habitantes }}</p>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#editarCanvas" (click)="obtenerCiudadPorId(ciud.id)">Editar</button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#eliminarCanvas" (click)="obtenerCiudadPorId(ciud.id)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OffCanvas Agregar Ciudad -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="agregarCanvas" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Agregar Ciudad</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form>
+      <div class="mb-3">
+        <label for="inputNombreCiudad" class="form-label">Nombre Ciudad</label>
+        <input type="text" class="form-control" id="inputNombreCiudad" name="nombreCiudad"
+        #nombreCiudad="ngModel" [(ngModel)]="ciudadesModel.nombreCiudad">
+      </div>
+      <div class="mb-3">
+        <label for="inputHabitantes" class="form-label">Habitantes</label>
+        <input type="text" class="form-control" id="inputHabitantes" name="habitantes"
+        #habitantes="ngModel" [(ngModel)]="ciudadesModel.habitantes">
+      </div>
+
+      <button class="btn btn-primary" data-bs-dismiss="offcanvas" (click)="agregarCiudades()">Guardar Ciudad</button>
+    </form>
+  </div>
+</div>
+
+<!-- OffCanvas Editar Ciudad -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="editarCanvas" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar Ciudad</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form>
+      <div class="mb-3">
+        <label for="inputNombreCiudad" class="form-label">Nombre Ciudad</label>
+        <input type="text" class="form-control" id="inputNombreCiudad" name="nombreCiudad"
+        #nombreCiudad="ngModel" [(ngModel)]="ciudadId.nombreCiudad">
+      </div>
+      <div class="mb-3">
+        <label for="inputHabitantes" class="form-label">Habitantes</label>
+        <input type="text" class="form-control" id="inputHabitantes" name="habitantes"
+        #habitantes="ngModel" [(ngModel)]="ciudadId.habitantes">
+      </div>
+
+      <button class="btn btn-primary" data-bs-dismiss="offcanvas" (click)="editarCiudad(ciudadId.id)">Editar Ciudad</button>
+    </form>
+  </div>
+</div>
+
+<!-- OffCanvas Eliminar Ciudad -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="eliminarCanvas" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Eliminar Ciudad</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+      <p>¿Se encuentra seguro de eliminar la Ciudad: <b> {{ ciudadId.nombreCiudad }} </b> ?</p>
+
+      <button class="btn btn-primary" data-bs-dismiss="offcanvas" (click)="eliminarCiudad(ciudadId.id)">Eliminar Ciudad</button>
+
+  </div>
+</div>

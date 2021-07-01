@@ -12,6 +12,10 @@ import { FormsModule } from '@angular/forms';
 import { EncuestasComponent } from './componentes/encuestas/encuestas.component';
 import { DetalleEncuestaComponent } from './componentes/detalle-encuesta/detalle-encuesta.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { CommonModule } from '@angular/common';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment.prod';
+import { CiudadesComponent } from './componentes/ciudades/ciudades.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +26,16 @@ import { FilterPipe } from './pipes/filter.pipe';
     UsuariosComponent,
     EncuestasComponent,
     DetalleEncuestaComponent,
-    FilterPipe
+    FilterPipe,
+    CiudadesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CommonModule,
+    AngularFireModule.initializeApp(environment.firebaseConfiguration)
   ],
   providers: [],
   bootstrap: [AppComponent]
